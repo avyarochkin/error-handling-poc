@@ -1,0 +1,18 @@
+<ion-item *ngIf="name"
+    [formGroup]="controlContainer.form"
+    [class.item-has-warnings]="hasWarnings">
+    <label>
+        <ion-label position="stacked">{{ label }}</ion-label>
+        <ion-input #ionInput [formControlName]="name" [type]="type"
+            (ionInput)="input($event)"
+        />
+    </label>
+    <ion-icon class="clear-button" slot="end" name="close-circle"
+        (click)="setValue('')"
+    />
+</ion-item>
+<div class="hint" *ngIf="hint">
+    <ion-icon class="hint-icon" name="information-circle-outline"/>
+    <div class="hint-text">{{ hint }}</div>
+</div>
+<app-field-message-container [name]="name"/>

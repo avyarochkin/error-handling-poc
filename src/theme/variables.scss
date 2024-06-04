@@ -1,2 +1,23 @@
 // For information on how to create your own theme, please see:
 // http://ionicframework.com/docs/theming/
+:root {
+    --PC1: #8fcc00;
+    --PC2: #93186c;
+    --PC3: #222222;
+    --PC4: #ffffff;
+
+    --GC1: #4b545c;
+    --GC2: #949fad;
+    --GC3: hsl(216, 30%, 86%);
+    --GC4: #f5f7f9;
+
+    --SC1: #4bb100;
+    --SCL1: #cdf5b1;
+    --SC2: #d00000;
+    --SCL2: #fcecec;
+    --SC3: #ee9900;
+    --SCL3: #fef6e6;
+    --SC6: #1768c9;
+    --SCL6: #d1e5ff;
+    --SC7: #a86200;
+}

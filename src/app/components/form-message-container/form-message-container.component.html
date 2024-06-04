@@ -1,0 +1,11 @@
+<app-message-banner @zoomHeight
+    *ngFor="let message of formMessages; let index = index"
+    [message]="message"
+    (dismiss)="dismissFormMessage(index)"
+/>
+<app-message-banner @zoomHeight
+    *ngIf="fieldMessageDetails?.length"
+    [message]="fieldMessage"
+    [details]="fieldMessageDetails"
+    (dismiss)="dismissFieldMessage()"
+/>

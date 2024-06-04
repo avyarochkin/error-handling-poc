@@ -1,0 +1,67 @@
+:host .container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    background: var(--banner-background, var(--PC4));
+    box-shadow: 0 2px 12px -8px var(--banner-shadow, var(--GC2));
+    color: var(--banner-color, var(--GC2));
+    display: flex;
+    flex-direction: row;
+    padding: 12px;
+    &.error {
+        --banner-color: var(--SC2);
+        --banner-background: var(--SCL2);
+        --banner-shadow: var(--SC2);
+    }
+    &.warning {
+        --banner-icon-color: var(--SC3);
+        --banner-color: var(--SC7);
+        --banner-background: var(--SCL3);
+        --banner-shadow: var(--SC3);
+    }
+    &.info {
+        --banner-color: var(--SC6);
+        --banner-background: var(--SCL6);
+        --banner-shadow: var(--SC6);
+    }
+    .banner-icon {
+        align-self: center;
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        padding: 8px 0;
+        color: var(--banner-icon-color, var(--banner-color, var(--GC2)));
+    }
+    .banner-text-content {
+        flex: 1;
+        padding-inline-start: 16px;
+        .banner-title {
+            font-size: 0.8rem;
+            font-weight: 800;
+            padding-bottom: 4px;
+        }
+        .banner-text {
+            font-size: 1rem;
+        }
+        .banner-details {
+            margin: 0;
+            padding-top: 4px;
+            padding-inline-start: 16px;
+            font-size: 0.9rem;
+        }
+    }
+    .close-icon {
+        color: var(--GC2);
+        width: 20px;
+        height: 20px;
+    }
+    .bg-icon {
+        position: absolute;
+        width: 96px;
+        height: 96px;
+        right: 0;
+        bottom: -24px;
+        color: var(--banner-color);
+        opacity: 0.1;
+    }
+}

@@ -1,0 +1,99 @@
+:host ion-content {
+    --background: var(--GC4);
+    --ion-item-background: transparent;
+}
+:host ion-list {
+    contain: layout;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 12px;
+    ion-item-group {
+        margin: 0 -12px;
+        padding: 16px 12px;
+        background-color: var(--PC4);
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+    ion-accordion-group {
+        margin: 0 -12px;
+        ion-accordion {
+            --ion-background-color: transparent;
+            ion-item-group { margin: 0; }
+        }
+    }
+
+}
+:host ion-button {
+    margin: 16px 12px;
+    --color: var(--PC3);
+    --transition: color 0.3s, background-color 0.3s;
+    &.button-solid {
+        --background: var(--PC1);
+        --background-activated: var(--GC1);
+        --background-focused: var(--GC1);
+        --background-activated-opacity: 0.5;
+        --background-focused-opacity: 0.25;
+        &.button-disabled {
+            opacity: 1;
+            --color: var(--GC2);
+            --background: var(--GC3);
+        }
+    }
+    &.button-outline {
+        --color: var(--GC1);
+        --color-activated: var(--GC2);
+        --border-color: var(--GC2);
+        --border-width: 2px;
+        --background-activated: transparent;
+        --background-focused: var(--GC3);
+        --background-focused-opacity: 0.5;
+    }
+    ion-spinner {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+:host ion-footer {
+    ion-button {
+        margin: 8px 2px;
+        --ion-toolbar-color: var(--PC2);
+    }
+}
+:host ion-col {
+    font-size: 0.8rem;
+    text-align: center;
+    align-self: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    --ion-grid-column-padding: 0;
+    ion-chip {
+        margin: 1px;
+        display: block;
+        min-height: auto;
+        --background: var(--SCL2);
+    }
+    &.on ion-chip { --background: var(--SCL1); }
+}
+:host ion-row:first-child ion-col,
+:host ion-row ion-col:first-child,
+:host ion-row ion-col:last-child {
+    font-weight: 700;
+    color: var(--GC1);
+    ion-chip {
+        --background: var(--GC3);
+        text-overflow: ellipsis;
+    }
+}
+:host ion-row {
+    &:last-child { border-top: 1px solid var(--GC3); }
+}
+ion-loading {
+    --width: 64px;
+    --height: 64px;
+    --background: var(--GC1);
+    --spinner-color: var(--PC4);
+}

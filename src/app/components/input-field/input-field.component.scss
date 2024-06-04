@@ -1,0 +1,32 @@
+@use '/src/input.scss';
+
+:host { display: block; }
+
+:host {
+    ion-input {
+        font-size: 1rem;
+        font-weight: 500;
+    }
+    .clear-button {
+        display: none;
+        color: var(--GC2);
+    }
+    ion-item.item-has-focus.item-has-value .clear-button {
+        display: initial;
+    }
+}
+
+:host .hint {
+    margin: 8px 12px 6px;
+    color: var(--GC2);
+    display: flex;
+    .hint-text {
+        font-size: 0.9rem;
+    }
+    .hint-icon {
+        font-size: 1.3rem;
+        margin-inline-end: 4px;
+        margin-top: -2px;
+    }
+}
+:host ion-item.item-has-focus + .hint { color: var(--GC1); }

@@ -1,25 +1,102 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Inbox
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
-  
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">
-        Inbox
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
-  
-  <ion-list>
-    <app-message *ngFor="let message of getMessages()" [message]="message"></app-message>
-  </ion-list>
+<ion-content>
+    <ion-backdrop *ngIf="showLoading"></ion-backdrop>
+    <form #f [formGroup]="form" (ngSubmit)="submit()" [attr.path]="formPath">
+        <ion-list>
+            <app-form-message-container/>
+            <app-input-field label="E-Mail" name="email" hint="Email should contain 8 or more characters"></app-input-field>
+            <app-input-field label="Phone number" name="phone" hint="Only US phone numbers are supported"></app-input-field>
+            <app-select-field label="Country" name="country" [items]="countryItems"></app-select-field>
+            <ion-item-group [formGroup]="$any(form.controls['street'])">
+                <app-input-field label="Street and house number" name="0"></app-input-field>
+                <app-input-field label="Street and house number" name="1"></app-input-field>
+            </ion-item-group>
+            <app-input-field label="Postal code" name="zipCode"></app-input-field>
+            <ion-accordion-group id="accordion-additional" (ionChange)="toggleAdditionalSection($event)">
+                <ion-accordion value="additional" [formGroup]="$any(form.controls['additional'])">
+                    <ion-item slot="header" color="light">
+                        Additional data
+                    </ion-item>
+                    <ion-item-group slot="content">
+                        <app-input-field label="Region" name="region"></app-input-field>
+                    </ion-item-group>
+                </ion-accordion>
+            </ion-accordion-group>
+        </ion-list>
+        <ion-button expand="block" type="submit" [disabled]="form.invalid">
+            <ion-spinner name="crescent" size="small" *ngIf="showLoading"></ion-spinner>
+            <ion-label *ngIf="!showLoading">Submit form</ion-label>
+        </ion-button>
+        <ion-button expand="block" fill="outline" (click)="f.requestSubmit()">
+            <ion-label>Submit anytime</ion-label>
+        </ion-button>
+    </form>
 </ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button id="addWarning" size="small">
+                <ion-icon slot="start" name="add"></ion-icon>
+                Warning
+            </ion-button>
+            <ion-button size="small" (click)="clearAllWarnings()">
+                <ion-icon name="close-circle-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+            <ion-button size="small" (click)="loadFormData()">
+                <ion-icon name="download" slot="start"></ion-icon>
+                Data
+            </ion-button>
+            <ion-button size="small" (click)="clearFormData()">
+                <ion-icon name="close-circle-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+    <ion-toolbar>
+        <ion-accordion-group>
+            <ion-accordion>
+                <ion-item slot="header" color="light">
+                  Form Control Status
+                </ion-item>
+                <ion-grid slot="content">
+                    <ion-row>
+                        <ion-col size="2"></ion-col>
+                        <ion-col size="2">touched</ion-col>
+                        <ion-col size="2">dirty</ion-col>
+                        <ion-col size="2">valid</ion-col>
+                        <ion-col size="4">value</ion-col>
+                    </ion-row>
+                    <ion-row *ngFor="let name of ['email', 'phone', 'country', 'street.0', 'street.1', 'zipCode', 'form']">
+                        <ng-container *ngIf="form.get(name) ?? form as ctrl">
+                            <ion-col size="2">{{ name }}</ion-col>
+                            <ion-col size="2" [class.on]="ctrl.touched" (click)="markUntouched(ctrl)">
+                                <ion-chip>{{ ctrl.touched }}</ion-chip>
+                            </ion-col>
+                            <ion-col size="2" [class.on]="ctrl.dirty" (click)="markPristine(ctrl)">
+                                <ion-chip>{{ ctrl.dirty }}</ion-chip>
+                            </ion-col>
+                            <ion-col size="2" [class.on]="ctrl.valid">
+                                <ion-chip>{{ ctrl.valid }}</ion-chip>
+                            </ion-col>
+                            <ion-col size="4" (click)="ctrl.reset()">
+                                <ion-chip>{{ ctrl.parent !== null ? (ctrl.value | json) : '...' }}</ion-chip>
+                            </ion-col>
+                        </ng-container>
+                    </ion-row>
+                </ion-grid>
+            </ion-accordion>
+        </ion-accordion-group>
+    </ion-toolbar>
+</ion-footer>
+
+<ion-popover #addWarningPopover trigger="addWarning">
+    <ng-template>
+        <ion-content scrollY="false">
+            <ion-list lines="none">
+                <ion-item button detail="false" *ngFor="let warning of warnings"
+                    (click)="addWarning(warning.fieldName, warning.message, addWarningPopover)">
+                    <ion-label>{{ warning.fieldLabel }}</ion-label>
+                </ion-item>
+            </ion-list>
+        </ion-content>
+    </ng-template>
+</ion-popover>

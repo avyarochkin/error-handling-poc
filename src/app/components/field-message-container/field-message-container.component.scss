@@ -1,0 +1,26 @@
+:host {
+    padding: 0;
+    .container {
+        overflow: hidden;
+    }
+    .error-line {
+        margin: 8px 12px;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .error-icon, .warning-icon {
+        font-size: 1.3rem;
+        margin-inline-end: 4px;
+        margin-top: -2px;
+    }
+    .error-icon { color: var(--SC2); }
+    .warning-icon { color: var(--SC3); }
+
+    .error-text, .warning-text {
+        font-size: .9rem;
+        display: block;
+    }
+    .error-text { color: var(--SC2); }
+    .warning-text { color: var(--SC7); }
+}

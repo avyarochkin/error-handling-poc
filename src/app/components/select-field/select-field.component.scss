@@ -1,0 +1,23 @@
+@use '/src/input.scss';
+
+:host { display: block; }
+
+:host {
+    ion-select {
+        min-height: auto;
+        padding: 8px 0;
+    }
+    .open-button, .clear-button {
+        color: var(--GC2);
+        margin: 8px 0 8px 8px;
+    }
+    ion-item {
+        .clear-button {
+            display: none;
+            color: var(--GC2);
+        }
+        &.item-selectable.ion-valid .clear-button {
+            display: initial;
+        }
+    }
+}

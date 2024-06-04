@@ -1,0 +1,34 @@
+:host ion-item {
+    align-items: stretch; // extend tap area
+    --border-radius: 8px;
+
+    --border-color: var(--GC3);
+    --border-width: 1px;
+    --padding-start: 0;
+
+    --background: var(--PC4);
+    --background-activated: var(--PC4);
+    --background-focused: var(--PC4);
+    --inner-padding-top: 12px;
+    --inner-padding-start: 12px;
+    --inner-padding-end: 12px;
+    --inner-border-width: 0;
+    --transition: border-color 0.5s, background-color 0.5s;
+    &.item-has-focus, &.ion-focused, &.ion-activated {
+        --border-color: var(--PC2);
+        ion-label { color: var(--PC2); }
+    }
+    &.ion-invalid.ion-dirty:not(.item-has-focus) {
+        --background: var(--SCL2);
+        --border-color: var(--SC2);
+    }
+    &.item-has-warnings:not(.item-has-focus) {
+        --background: var(--SCL3);
+        --border-color: var(--SC3);
+    }
+    ion-label {
+        margin: 0;
+        color: var(--GC1);
+        font-size: 0.9rem;
+    }
+}

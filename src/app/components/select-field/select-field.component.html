@@ -1,0 +1,22 @@
+<ion-item *ngIf="name" class="item-selectable"
+    [formGroup]="controlContainer.form"
+    [class.item-has-warnings]="hasWarnings"
+    (click)="openList()">
+    <label>
+        <ion-label position="stacked">{{ label }}</ion-label>
+        <ion-select #ionSelect interface="action-sheet" toggleIcon=""
+            [formControlName]="name">
+            <ion-select-option *ngFor="let item of items"
+                [value]="item.code">
+                {{ item.title}}
+            </ion-select-option>
+        </ion-select>
+    </label>
+    <ion-icon class="open-button" slot="end" name="chevron-expand"
+        (click)="openList()"
+    />
+    <ion-icon class="clear-button" slot="end" name="close-circle"
+        (click)="clearValue($event)"
+    />
+</ion-item>
+<app-field-message-container [name]="name"/>

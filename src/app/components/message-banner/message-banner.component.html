@@ -1,0 +1,12 @@
+<div class="container" *ngIf="message" [ngClass]="messageType[message.type]">
+    <ion-icon class="banner-icon" slot="start" [name]="messageTypeIcon[message.type]"/>
+    <ion-icon class="bg-icon" [name]="messageTypeIcon[message.type]"/>
+    <ion-label class="banner-text-content">
+        <div class="banner-title">{{ messageType[message.type] | uppercase }}</div>
+        <div class="banner-text">{{ message.text }}</div>
+        <ul class="banner-details" *ngIf="details">
+            <li *ngFor="let detail of details">{{ detail }}</li>
+        </ul>
+    </ion-label>
+    <ion-icon class="close-icon" name="close-circle" (click)="dismiss.emit()"/>
+</div>

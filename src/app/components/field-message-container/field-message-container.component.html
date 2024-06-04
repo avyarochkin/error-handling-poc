@@ -1,0 +1,17 @@
+<div @zoomHeight class="container"
+    *ngIf="control && control.invalid && control.dirty && control.touched">
+    <div class="error-line"
+        *ngFor="let error of control.errors | keyvalue">
+        <ion-icon class="error-icon" name="warning"/>
+        <ion-text class="error-text">Error: {{ getErrorText(error.key) }}</ion-text>
+    </div>
+</div>
+
+<div @zoomHeight class="container"
+    *ngIf="extControl?.warnings">
+    <div class="error-line"
+        *ngFor="let warning of extControl!.warnings | keyvalue">
+        <ion-icon class="warning-icon" name="alert-circle"/>
+        <ion-text class="warning-text">Warning: {{ warning.key }}</ion-text>
+    </div>
+</div>
